@@ -332,6 +332,7 @@ func GetFromSession(key string, req *http.Request) (string, error) {
 
 func getSessionValue(session *sessions.Session, key string) (string, error) {
 	value := session.Values[key]
+	fmt.Println("get key", key, "  \n", value)
 	if value == nil {
 		return "", fmt.Errorf("could not find a matching session for this request")
 	}
@@ -363,5 +364,7 @@ func updateSessionValue(session *sessions.Session, key, value string) error {
 	}
 
 	session.Values[key] = b.String()
+	fmt.Println("push key", key)
+
 	return nil
 }
