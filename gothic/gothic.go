@@ -324,7 +324,7 @@ func GetFromSession(key string, req *http.Request) (string, error) {
 	session, _ := Store.Get(req, SessionName)
 	value, err := getSessionValue(session, key)
 	if err != nil {
-		return "", errors.New("could not find a matching session for this request")
+		return "", err
 	}
 
 	return value, nil
