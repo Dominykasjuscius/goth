@@ -321,7 +321,10 @@ func StoreInSession(key string, value string, req *http.Request, res http.Respon
 // GetFromSession retrieves a previously-stored value from the session.
 // If no value has previously been stored at the specified key, it will return an error.
 func GetFromSession(key string, req *http.Request) (string, error) {
-	session, _ := Store.Get(req, SessionName)
+	session, err := Store.Get(req, SessionName)
+	if err != nil {
+		return "", err
+	}
 	value, err := getSessionValue(session, key)
 	if err != nil {
 		return "", err
